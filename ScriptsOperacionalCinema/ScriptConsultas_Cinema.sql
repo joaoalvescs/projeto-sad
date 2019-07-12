@@ -1,6 +1,5 @@
 /* BANCO DE DADOS 
 Banco Cinema: Script de consultas
- Alisson Rodrigo Freire Santos
  Igor Terriaga Santos
 */
 

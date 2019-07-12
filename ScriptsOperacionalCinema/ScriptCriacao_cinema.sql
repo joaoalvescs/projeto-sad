@@ -1,6 +1,5 @@
 /* BANCO DE DADOS 
 Banco Cinema: Script de criação
- Alisson Rodrigo Freire Santos
  Igor Terriaga Santos
 */
 

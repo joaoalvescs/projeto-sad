@@ -1,6 +1,5 @@
 /* BANCO DE DADOS 
 Banco Cinema: Script de povoamento
- Alisson Rodrigo Freire Santos
  Igor Terriaga Santos
 */
 
