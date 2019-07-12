@@ -1,6 +1,6 @@
 /* BANCO DE DADOS 
 Banco Cinema: Script de criação
- Igor Terriaga Santos
+ Igor Terriaga Santos João Alves e Clovijan
 */
 
 CREATE DOMAIN cinema.tipo_valor AS DECIMAL(10,2);
