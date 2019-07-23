@@ -609,5 +609,7 @@ INSERT INTO cinema.compra_produto (id_compra, id_produto, quantidade)
 INSERT INTO cinema.compra_produto (id_compra, id_produto, quantidade) 
     VALUES (8, 1, 2);
 	
+-- Cinema --
+
 
 
