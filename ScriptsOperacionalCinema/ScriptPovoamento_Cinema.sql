@@ -609,7 +609,13 @@ INSERT INTO cinema.compra_produto (id_compra, id_produto, quantidade)
 INSERT INTO cinema.compra_produto (id_compra, id_produto, quantidade) 
     VALUES (8, 1, 2);
 	
--- Cinema --
+-- Unidade-Cinema --
 
+INSERT INTO cinema.unidade_cinema (id_cinema,nome,descricao) 
+    VALUES(1,'Cinema Itabaiana','O único cinema em Itabaiana')
+INSERT INTO cinema.unidade_cinema (id_cinema,nome,descricao) 
+    VALUES(2,'Cinema Jardins','O único cinema fora do shopping no bairro Jardins em Aracaju')
+INSERT INTO cinema.unidade_cinema (id_cinema,nome,descricao) 
+    VALUES(3,'Cinema Centro','Um dos poucos cinemas no Centro de Aracaju')
 
 
