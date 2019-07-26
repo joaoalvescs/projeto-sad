@@ -14,20 +14,21 @@ SELECT * FROM DIM_CINEMA
 DROP TABLE FATO_PRODUTO
 
 CREATE TABLE  FATO_PRODUTO(
-  id_prod INT NOT NULL PRIMARY KEY,
-  cod_prod INT NOT NULL,
-  id_end INT NOT NULL REFERENCES DIM_ENDERECO_CLIENTE(id_end),
-  id_tem INT NOT NULL REFERENCES DIM_TEMPO(id_tem),
-  id_tip INT NOT NULL REFERENCES DIM_PRODUTO(id_prod),
-  id_pag INT NOT NULL REFERENCES DIM_PAGAMENTO(id_pag),
-  id_cli INT NOT NULL REFERENCES DIM_CLIENTE (id_cli),
-  id_cin INT NOT NULL REFERENCES DIM_CINEMA (id_cin),
+  id_fato_produto INT NOT NULL PRIMARY KEY,
+  cod_produto INT NOT NULL,
+  id_endereco INT NOT NULL REFERENCES DIM_ENDERECO_CLIENTE(id_endereco),
+  id_tempo INT NOT NULL REFERENCES DIM_TEMPO(id_tempo),
+  id_produto INT NOT NULL REFERENCES DIM_PRODUTO(id_produto),
+  id_pagamento INT NOT NULL REFERENCES DIM_PAGAMENTO(id_pagamento),
+  id_cliente INT NOT NULL REFERENCES DIM_CLIENTE (id_cliente),
+  id_cinema INT NOT NULL REFERENCES DIM_CINEMA (id_cinema),
+  id_plataforma INT NOT NULL REFERENCES DIM_PLATAFORMA (id_plataforma),
   quantidade INT
 )
 
 CREATE TABLE DIM_TEMPO (
-  id_tem INT NOT NULL PRIMARY KEY,
-  cod_tem VARCHAR(45) NOT NULL,
+  id_tempo INT NOT NULL PRIMARY KEY,
+  cod_tempo VARCHAR(45) NOT NULL,
   Dia INT NOT NULL,
   Mes INT NOT NULL,
   Ano INT NOT NULL,
@@ -56,8 +57,8 @@ CREATE TABLE  DIM_CLIENTE(
 )
 
 CREATE TABLE DIM_ENDERECO_CLIENTE (
-  id_end INT NOT NULL PRIMARY KEY,
-  cod_end VARCHAR(45) NOT NULL,
+  id_endereco INT NOT NULL PRIMARY KEY,
+  cod_endereco VARCHAR(45) NOT NULL,
   rua VARCHAR(45) NULL,
   numero VARCHAR(45) NULL,
   cidade VARCHAR(45) NULL,
@@ -67,27 +68,27 @@ CREATE TABLE DIM_ENDERECO_CLIENTE (
 )
 
 CREATE TABLE DIM_PLATAFORMA (
-  id_plat INT NOT NULL PRIMARY KEY,
-  cod_plat INT NOT NULL,
-  tipo_plat VARCHAR(45) NULL
+  id_plataforma INT NOT NULL PRIMARY KEY,
+  cod_plataforma INT NOT NULL,
+  tipo_plataforma VARCHAR(45) NULL
  )
 
 CREATE TABLE DIM_PRODUTO(
-  id_prod INT NOT NULL PRIMARY KEY,
-  cod_prod VARCHAR(45) NOT NULL,
-  nm_prod VARCHAR(45) NULL,
-  qtd_prod VARCHAR(45) NULL,
-  valor_prod DECIMAL(10,2) NULL
+  id_produto INT NOT NULL PRIMARY KEY,
+  cod_produto VARCHAR(45) NOT NULL,
+  nm_produto VARCHAR(45) NULL,
+  qtd_produto VARCHAR(45) NULL,
+  valor_produto DECIMAL(10,2) NULL
 )
 
 CREATE TABLE  DIM_PAGAMENTO (
-  id_pag INT NOT NULL PRIMARY KEY,
-  cod_pag INT NOT NULL,
-  tipo_pag VARCHAR(45) NULL,
+  id_pagamento INT NOT NULL PRIMARY KEY,
+  cod_pagamento INT NOT NULL,
+  tipo_pagamento VARCHAR(45) NULL,
 )
 
 CREATE TABLE DIM_CINEMA (
-  id_cin INT NOT NULL PRIMARY KEY,
-  nome_cin VARCHAR(45) NOT NULL,
-  desc_cin VARCHAR NULL,
+  id_cinema INT NOT NULL PRIMARY KEY,
+  nome_cinema VARCHAR(45) NOT NULL,
+  desc_cinema VARCHAR(100) NULL,
 )
