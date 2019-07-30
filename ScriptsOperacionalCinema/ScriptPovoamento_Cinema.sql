@@ -10,20 +10,21 @@ INSERT INTO TB_UNIDADE_CINEMA VALUES('Cinema Jardins','O único cinema fora do s
 INSERT INTO TB_UNIDADE_CINEMA VALUES('Cinema Centro','Um dos poucos cinemas no Centro de Aracaju')
 
 -- ENDERECOS --
-INSERT INTO TB_ENDERECO VALUES ('Rua Riachuelo',65, 'Estância', 'Botequim','Casa');
-INSERT INTO TB_ENDERECO VALUES ('Rua Moreira', 15, 'Umbaúba', 'José Ferreira','Apartamento: A8');
-INSERT INTO TB_ENDERECO VALUES ('Rua B',223, 'Aracaju', 'Atalaia','Casa');
-INSERT INTO TB_ENDERECO VALUES ('Rua SE',80, 'Aracaju', 'Bugio','Casa');
-INSERT INTO TB_ENDERECO VALUES ('Rua E',154, 'Aracaju', 'Farolândia','Condomínio');
-INSERT INTO TB_ENDERECO VALUES ('Rua Fonsceca',310, 'Aracaju', 'Atalaia','Apartamento: E26');
-INSERT INTO TB_ENDERECO VALUES ('Rua X',76, 'São Cristóvão', 'Floresta','Casa');
-INSERT INTO TB_ENDERECO VALUES ('Rua Comercial',214, 'Aracaju', 'Centro','Apartamento: G10');
-INSERT INTO TB_ENDERECO VALUES ('Rua J',154, 'Aracaju', 'América','');
-INSERT INTO TB_ENDERECO VALUES ('Rua São João',310, 'Aracaju', 'Atalaia','Apartamento: B15');
-INSERT INTO TB_ENDERECO VALUES ('Rua C',44, 'Aracaju', 'Inácio Barbosa','Apartamento');
-INSERT INTO TB_ENDERECO VALUES ('Rua Euclides',125, 'Aracaju', 'Centro','Apartamento: A5');
-INSERT INTO TB_ENDERECO VALUES ('Rua Peixoto',77, 'Aracaju', 'Centro','');
-INSERT INTO TB_ENDERECO	VALUES ('Rua Valério',86, 'Aracaju', 'Bugio','Casa');
+-- rua, numero, cidade, bairro, complemento, estado, cep
+INSERT INTO TB_ENDERECO VALUES ('Rua Riachuelo',65, 'Estância', 'Botequim','Casa', 'SE', '49500000');
+INSERT INTO TB_ENDERECO VALUES ('Rua Moreira', 15, 'Umbaúba', 'José Ferreira','Apartamento: A8', 'SE', '495000487');
+INSERT INTO TB_ENDERECO VALUES ('Rua B',223, 'Aracaju', 'Atalaia','Casa', 'AL', '49500987');
+INSERT INTO TB_ENDERECO VALUES ('Rua SE',80, 'Aracaju', 'Bugio','Casa', 'SE', '49500000');
+INSERT INTO TB_ENDERECO VALUES ('Rua E',154, 'Aracaju', 'Farolândia','Condomínio', 'SE', '49500000');
+INSERT INTO TB_ENDERECO VALUES ('Rua Fonsceca',310, 'Aracaju', 'Atalaia','Apartamento: E26', 'SE', '49500000');
+INSERT INTO TB_ENDERECO VALUES ('Rua X',76, 'São Cristóvão', 'Floresta','Casa', 'SE', '49500000');
+INSERT INTO TB_ENDERECO VALUES ('Rua Comercial',214, 'Aracaju', 'Centro','Apartamento: G10', 'SE', '49500000');
+INSERT INTO TB_ENDERECO VALUES ('Rua J',154, 'Aracaju', 'América','', 'SE', '49500000');
+INSERT INTO TB_ENDERECO VALUES ('Rua São João',310, 'Aracaju', 'Atalaia','Apartamento: B15', 'SE', '49500000');
+INSERT INTO TB_ENDERECO VALUES ('Rua C',44, 'Aracaju', 'Inácio Barbosa','Apartamento', 'SE', '495000061');
+INSERT INTO TB_ENDERECO VALUES ('Rua Euclides',125, 'Aracaju', 'Centro','Apartamento: A5', 'SE', '49500097');
+INSERT INTO TB_ENDERECO VALUES ('Rua Peixoto',77, 'Contagem', 'Centro','', 'MG', '49500000');
+INSERT INTO TB_ENDERECO	VALUES ('Rua Valério',86, 'Aracaju', 'Bugio','Casa', 'SE', '49500000');
 
     
 -- PESSOA --
