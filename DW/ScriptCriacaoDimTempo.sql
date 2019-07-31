@@ -50,9 +50,18 @@ AS
 WHILE(@dt_inicial <= @dt_final)
 	BEGIN
 		SET LANGUAGE Brazilian
+		
+		
+		
 		-- pegando a hora
-		SET @hora = convert(varchar, @dt_inicial(), 14)
-		--
+		
+		-- SET @hora = convert(varchar, @dt_inicial(), 14)
+		SET @hora = select DATENAME(HOUR,@dt_inicial)
+		
+
+		
+		
+		
 		SET @dia = DATEPART(dd,@dt_inicial)
 		SET @mes = DATEPART(mm,@dt_inicial)
 		SET @ano = DATEPART(yy,@dt_inicial)
