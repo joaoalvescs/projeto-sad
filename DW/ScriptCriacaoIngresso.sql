@@ -1,0 +1,45 @@
+CREATE DATABASE CINEMA;
+
+CREATE TABLE DIM_FILME(
+  id_filme INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  cod_filme INT NOT NULL,
+  nm_filme VARCHAR(45) NOT NULL,
+  gr_filme VARCHAR(45) NOT NULL,
+  pdt_filme VARCHAR(45) NOT NULL,
+  dir_filme VARCHAR(45) NOT NULL,
+  dur_filme TIME NOT NULL
+)
+
+CREATE TABLE  DIM_PLANO(
+  id_plano INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  cod_plano VARCHAR(45) NOT NULL,
+  vivo_valoriza VARCHAR(45) NULL DEFAULT NULL,
+  vale_cultura VARCHAR(45) NULL DEFAULT NULL
+)
+
+CREATE TABLE  DIM_PRECO(
+  id_preco INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  cod_preco VARCHAR(45) NOT NULL,
+  valor_preco NUMERIC(10,2)
+)
+
+CREATE TABLE  DIM_SESSAO(
+  id_sessao INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  hora_sessao TIME NOT NULL,
+  data_sessao DATE NOT NULL,
+  linguagem_sessao VARCHAR(25) NOT NULL,
+)
+
+CREATE TABLE  FATO_INGRESSO(
+  id_fato_ingresso INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+  cod_ingresso VARCHAR(45) NOT NULL,
+  status_ingresso VARCHAR(25) NOT NULL,
+  quantidade INT NOT NULL,
+  id_tempo INT NOT NULL REFERENCES DIM_TEMPO(id_tempo),
+  id_filme INT NOT NULL REFERENCES DIM_FILME(id_filme),
+  id_sessao INT NOT NULL REFERENCES DIM_SESSAO(id_sessao),
+  id_plano INT NOT NULL REFERENCES DIM_PLANO(id_plano),
+  id_preco INT NOT NULL REFERENCES DIM_PRECO(id_preco)
+)
+
+
