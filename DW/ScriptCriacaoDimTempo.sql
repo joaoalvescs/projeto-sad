@@ -5,7 +5,6 @@ CREATE TABLE DIM_TEMPO (
   ANO INT NOT NULL,
   NOME_MES VARCHAR(20) NOT NULL,
   TRIMESTRE INT NOT NULL,
-  TURNO VARCHAR(25) NOT NULL CHECK (Tipo in ('MATINÊ','NOITE')),
   Hora 	DATETIME NOT NULL,
   DATA DATETIME NOT NULL,
   NIVEL VARCHAR(8) NOT NULL,
@@ -31,8 +30,8 @@ CREATE TABLE DIM_Feriados(
 
 CREATE PROCEDURE SP_Dim_Tempo (@dt_inicial datetime, @dt_final datetime)
 AS 
-	DECLARE @hora varchar(25)
-	DECLARE @nm_turno varchar(25)
+	--DECLARE @hora varchar(25)
+	--DECLARE @nm_turno varchar(25)
 	DECLARE @dia smallint
 	DECLARE @mes smallint
 	DECLARE @ano smallint
@@ -56,7 +55,7 @@ WHILE(@dt_inicial <= @dt_final)
 		-- pegando a hora
 		--rever isso aqui
 		-- SET @hora = convert(varchar, @dt_inicial(), 14)
-		SET @hora = select DATENAME(HOUR,@dt_inicial)
+		--SET @hora = select DATENAME(HOUR,@dt_inicial)
 		
 
 		
@@ -69,14 +68,14 @@ WHILE(@dt_inicial <= @dt_final)
 		SET @nm_mes = DATENAME(mm,@dt_inicial)
 		
 		-- TESTANDO A HORA E SETANDO O TURNO
-		IF (@hora>=7 && @hora <= 18)
-			BEGIN
-				SET @nm_turno = 'MATINE' 
-			END
-		ELSE
-			BEGIN
-				SET @nm_turno = 'NOITE'	
-			END	
+		--IF (@hora>=7 && @hora <= 18)
+			--BEGIN
+				--SET @nm_turno = 'MATINE' 
+			--END
+		--ELSE
+			--BEGIN
+				--SET @nm_turno = 'NOITE'	
+			--END	
 		
 		IF(@nm_dia = 'Sábado' OR @nm_dia = 'Domingo') 
 			BEGIN
