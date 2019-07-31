@@ -54,7 +54,7 @@ WHILE(@dt_inicial <= @dt_final)
 		
 		
 		-- pegando a hora
-		
+		--rever isso aqui
 		-- SET @hora = convert(varchar, @dt_inicial(), 14)
 		SET @hora = select DATENAME(HOUR,@dt_inicial)
 		
