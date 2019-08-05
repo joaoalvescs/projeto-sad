@@ -5,9 +5,9 @@ Banco Cinema: Script de povoamento
 
 -- Unidade-Cinema --
 
-INSERT INTO TB_UNIDADE_CINEMA VALUES('Cinema Itabaiana','O único cinema em Itabaiana')
-INSERT INTO TB_UNIDADE_CINEMA VALUES('Cinema Jardins','O único cinema fora do shopping no bairro Jardins em Aracaju')
-INSERT INTO TB_UNIDADE_CINEMA VALUES('Cinema Centro','Um dos poucos cinemas no Centro de Aracaju')
+INSERT INTO TB_UNIDADE_CINEMA VALUES( 'Cinema Itabaiana','O único cinema em Itabaiana')
+INSERT INTO TB_UNIDADE_CINEMA VALUES( 'Cinema Jardins','O único cinema fora do shopping no bairro Jardins em Aracaju')
+INSERT INTO TB_UNIDADE_CINEMA VALUES( 'Cinema Centro','Um dos poucos cinemas no Centro de Aracaju')
 
 -- ENDERECOS --
 -- rua, numero, cidade, bairro, complemento, estado, cep
@@ -327,5 +327,19 @@ INSERT INTO TB_COMPRA_PRODUTO VALUES (6, 5);
 INSERT INTO TB_COMPRA_PRODUTO VALUES (7, 1);
 INSERT INTO TB_COMPRA_PRODUTO VALUES (7, 6);
 INSERT INTO TB_COMPRA_PRODUTO VALUES (8, 1);
-	
+
+-- TURNO --
+INSERT INTO TB_TURNO VALUES ('MATINÊ')
+INSERT INTO TB_TURNO VALUES ('NOITE')
+INSERT INTO TB_TURNO VALUES ('MATINÊ')
+INSERT INTO TB_TURNO VALUES ('MATINÊ')
+INSERT INTO TB_TURNO VALUES ('NOITE')
+
+
+-- SESSAO_TURNO --
+INSERT INTO TB_SESSAO_TURNO VALUES (1,1)
+INSERT INTO TB_SESSAO_TURNO VALUES (2,2)
+INSERT INTO TB_SESSAO_TURNO VALUES (3,3)
+INSERT INTO TB_SESSAO_TURNO VALUES (4,4)
+INSERT INTO TB_SESSAO_TURNO VALUES (5,5)
 
