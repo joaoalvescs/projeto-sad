@@ -48,18 +48,7 @@ AS
 	
 WHILE(@dt_inicial <= @dt_final)
 	BEGIN
-		SET LANGUAGE Brazilian
-		
-		
-		
-		-- pegando a hora
-		--rever isso aqui
-		-- SET @hora = convert(varchar, @dt_inicial(), 14)
-		--SET @hora = select DATENAME(HOUR,@dt_inicial)
-		
-
-		
-		
+		SET LANGUAGE Brazilian	
 		
 		SET @dia = DATEPART(dd,@dt_inicial)
 		SET @mes = DATEPART(mm,@dt_inicial)
@@ -67,16 +56,7 @@ WHILE(@dt_inicial <= @dt_final)
 		SET @nm_dia = DATENAME(dw,@dt_inicial)
 		SET @nm_mes = DATENAME(mm,@dt_inicial)
 		
-		-- TESTANDO A HORA E SETANDO O TURNO
-		--IF (@hora>=7 && @hora <= 18)
-			--BEGIN
-				--SET @nm_turno = 'MATINE' 
-			--END
-		--ELSE
-			--BEGIN
-				--SET @nm_turno = 'NOITE'	
-			--END	
-		
+
 		IF(@nm_dia = 'Sábado' OR @nm_dia = 'Domingo') 
 			BEGIN
 				SET @dia_util = 'NÃO'
