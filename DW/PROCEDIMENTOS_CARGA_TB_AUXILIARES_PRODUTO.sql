@@ -1,5 +1,19 @@
 /*CARGA PARA A TB_AUX VENDA_PRODUTO*/
+CREATE PROCEDURE SP_OLTP_FATO_VENDA_PRODUTO(@data DATETIME)
+AS
+BEGIN
+	DECLARE @cod_compra INT, @dt_compra DATE, @hora_venda TIME, @id_endereco INT, @id_produto INT, @id_pagamento INT,
+			@id_cliente INT, @id_cinema INT, @id_plataforma INT, @id_turno INT, @valor_compra NUMERIC(10,2)
 
+	DELETE FROM TB_AUX_FATO_VENDA_PRODUTO WHERE DATA_CARGA = @data
+	
+	DECLARE C_FATO_VENDA CURSOR FOR SELECT COM.CODIGO_COMPRA, COM.DATA_COMPRA, COM.HORA_COMPRA, COM.VALOR_COMPRA,COM.ID_CLIENTE,
+										    FROM TB_COMPRA AS COM
+						
+	OPEN C_FATO VENDA
+	FETCH C_FATO_VENDA INTO @cod_compra, @dt_compra, @hora_venda, @valo_compra, @
+	
+END
 
 
 /* CARGA PARA O TB_AUX_CLIENTE*/
