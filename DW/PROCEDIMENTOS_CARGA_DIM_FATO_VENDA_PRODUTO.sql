@@ -1,5 +1,62 @@
 -----------------------------CARGA PARA A DIM_FATO_VENDA_PRODUTO-------------------------------------------
 
+CREATE PROCEDURE SP_FATO_VENDA_PRODUTO(@data_carga DATETIME)
+AS
+BEGIN
+	DECLARE @cod_compra INT, @dt_venda DATE, @hora_venda TIME, @cod_endereco INT, @cod_produto INT, @tipo_pagamento varchar(25),
+			@cod_cliente INT, @cod_cinema INT, @cod_plataforma INT, @valor_pago numeric(10,2), @quantidade INT
+	DECLARE @id_endereco INT, @id_tempo INT, @id_produto INT , @id_pagamento INT, @id_cliente INT, @id_cinema INT, @id_plataforma INT, @turno VARCHAR(20), @id_turno INT
+
+	DECLARE C_FATO_PRODUTO CURSOR FOR SELECT COD_COMPRA, DT_VENDA, HORA_VENDA, ID_ENDERECO, ID_PRODUTO, TIPO_PAGAMENTO,
+											 ID_CLIENTE, ID_CINEMA, ID_PLATAFORMA, VALOR_PAGO, QUANTIDADE FROM TB_AUX_FATO_VENDA_PRODUTO
+
+	FETCH C_FATO_PRODUTO INTO @cod_compra, @dt_venda, @hora_venda, @cod_endereco, @cod_produto, @tipo_pagamento,
+							  @cod_cliente, @cod_cinema, @cod_plataforma, @valor_pago, @quantidade
+
+	WHILE(@@FETCH_STATUS = 0)
+		BEGIN
+			IF(@cod_compra IS NULL OR @dt_venda IS NULL OR @hora_venda IS NULL OR @cod_endereco IS NULL OR @cod_produto IS NULL OR
+			   @tipo_pagamento IS NULL OR @cod_cliente IS NULL OR @cod_cinema IS NULL OR @cod_plataforma IS NULL OR @valor_pago IS NULL OR
+			   @quantidade IS NULL)
+				BEGIN
+					INSERT INTO TB_VIOLACAO_FATO_VENDA_PRODUTO(DATA_CARGA, COD_COMPRA, DT_VENDA, HORA_VENDA, ID_ENDERECO, ID_PRODUTO,
+															   TIPO_PAGAMENTO, ID_CLIENTE, ID_CINEMA, ID_PLATAFORMA, VALOR_PAGO, QUANTIDADE,
+															   DATA_VIOLACAO, VIOLACAO)
+					VALUES(@data_carga,@cod_compra, @dt_venda, @hora_venda, @cod_endereco, @cod_produto, @tipo_pagamento,
+								  @cod_cliente, @cod_cinema, @cod_plataforma, @valor_pago, @quantidade, GETDATE(), 'LINHA POSSUI ATRINBUTOS NULOS')
+				END
+			ELSE
+				BEGIN
+					SET @id_endereco = (SELECT ID_ENDERECO FROM DIM_ENDERECO_CLIENTE WHERE COD_ENDERECO = @cod_endereco)
+					SET @id_tempo =(SELECT ID_TEMPO FROM DIM_TEMPO WHERE DATA = @dt_venda)
+					SET @id_produto =(SELECT ID_PRODUTO FROM DIM_PRODUTO WHERE COD_PRODUTO = @cod_produto)
+					SET @id_pagamento =(SELECT ID_PAGAMENTO FROM DIM_PAGAMENTO WHERE TIPO_PAGAMENTO = @tipo_pagamento)
+					SET @id_cliente =(SELECT ID_CLIENTE FROM DIM_CLIENTE WHERE COD_CLIENTE = @cod_cliente)
+					SET @id_cinema =(SELECT ID_CINEMA FROM DIM_CINEMA WHERE COD_CINEMA = @cod_cinema)
+					SET @id_plataforma =(SELECT ID_PLATAFORMA FROM DIM_PLATAFORMA WHERE COD_PLATAFORMA = @cod_plataforma)
+					IF(@hora_venda >= '10:00' AND @hora_venda <= '18:00')
+						BEGIN
+							SET @turno = 'MATINE'
+						END
+					ELSE 
+						BEGIN
+							SET @turno = 'NOITE'
+						END
+					SET @id_turno =(SELECT ID_TURNO FROM DIM_TURNO WHERE TIPO = @turno)
+
+					INSERT INTO FATO_VENDA_PRODUTO(COD_COMPRA,ID_ENDERECO,ID_TEMPO,ID_PRODUTO,ID_PAGAMENTO,ID_CLIENTE,ID_CINEMA,
+								ID_PLATAFORMA,ID_TURNO, QUANTIDADE, VALOR_PAGO)
+					VALUES(@cod_compra,@id_endereco,@id_tempo,@id_produto, @id_pagamento,@id_cliente, @id_cinema, @id_plataforma,
+						   @id_turno,@quantidade, @valor_pago)
+				END
+
+			FETCH C_FATO_PRODUTO INTO @cod_compra, @dt_venda, @hora_venda, @cod_endereco, @cod_produto, @tipo_pagamento,
+							  @cod_cliente, @cod_cinema, @cod_plataforma, @valor_pago, @quantidade
+		END
+
+	CLOSE C_FATO_PRODUTO
+	DEALLOCATE C_FATO_PRODUTO
+END
 
 -----------------------------CARGA PARA A DIM_CLIENTE------------------------------------------------------
 
@@ -134,11 +191,11 @@ BEGIN
 						END
 					ELSE
 						BEGIN
-							INSERT INTO DIM_PRODUTO(COD_PRODUTO, NM_PRODUTO, QTD_PRODUTO, VALOR_PRODUTO, DT_INICIO, DT_FIM, FL_CORRENTE)
+							INSERT INTO DIM_PRODUTO(COD_PRODUTO, NM_PRODUTO, VALOR_PRODUTO, DT_INICIO, DT_FIM, FL_CORRENTE)
 							VALUES(@cod_produto, @nm_produto, @valor_produto, @data_carga, NULL, 'SIM')
 						END
 				END
-			FETCH C_PRODUTO INTO @cod_produto, @nm_produto, @qtd_produto, @valor_produto
+			FETCH C_PRODUTO INTO @cod_produto, @nm_produto, @valor_produto
 		END
 	CLOSE C_PRODUTO
 	DEALLOCATE C_PRODUTO
