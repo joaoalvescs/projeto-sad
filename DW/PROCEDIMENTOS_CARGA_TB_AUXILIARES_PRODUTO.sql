@@ -1,6 +1,6 @@
 -----------------------------CARGA PARA A TB_AUX VENDA_PRODUTO-------------------------------------------
 
-CREATE PROCEDURE SP_OLTP_FATO_VENDA_PRODUTO(@data DATETIME)
+ALTER PROCEDURE SP_OLTP_FATO_VENDA_PRODUTO(@data DATETIME)
 AS
 BEGIN
 	DECLARE @cod_compra INT, @dt_venda DATE, @hora_venda TIME, @id_endereco INT, @id_produto INT, @tipo_pag VARCHAR(25),
@@ -27,11 +27,13 @@ BEGIN
 		FETCH C_FATO_VENDA INTO @cod_compra, @dt_venda, @hora_venda, @valor_compra,@id_cinema, @id_cliente, @tipo_pag, @id_plataforma,
 							@id_endereco, @id_produto
 	END
+	CLOSE C_FATO_VENDA
+	DEALLOCATE C_FATO_VENDA
 END
 
-
-
-
+EXEC SP_OLTP_FATO_VENDA_PRODUTO '20190101'
+SELECT * FROM TB_AUX_FATO_VENDA_PRODUTO
+SELECT * FROM TB_COMPRA_PRODUTO
 -----------------------------CARGA PARA A TB_AUX_CLIENTE-------------------------------------------
 
 CREATE PROCEDURE SP_OLTP_CLIENTE(@data DATETIME)
@@ -56,6 +58,9 @@ BEGIN
 	DEALLOCATE C_CLIENTE
 END
 
+SELECT * FROM TB_CLIENTE
+SELECT * FROM TB_AUX_CLIENTE
+EXEC SP_OLTP_CLIENTE '20190101'
 
 -----------------------------CARGA PARA A TB_AUX_ENDERECO_CLIENTE-------------------------------------------
 
@@ -67,7 +72,9 @@ BEGIN
 	SELECT @data, ID_ENDERECO, RUA, NUMERO, CIDADE, BAIRRO,COMPLEMENTO, ESTADO, CEP FROM TB_ENDERECO
 END
 
-
+EXEC SP_OLTP_ENDERECO_CLIENTE '20190101'
+SELECT * FROM TB_ENDERECO
+SELECT * FROM TB_AUX_ENDERECO_CLIENTE
 -----------------------------CARGA PARA A TB_AUX_PLATAFORMA-------------------------------------------------
 
 CREATE PROCEDURE SP_OLTP_PLATAFORMA(@data DATETIME)
@@ -78,6 +85,9 @@ BEGIN
 	SELECT @data, ID_PLATAFORMA, TIPO FROM TB_PLATAFORMA
 END
 
+EXEC SP_OLTP_PLATAFORMA '20190101'
+SELECT * FROM TB_PLATAFORMA
+SELECT * FROM TB_AUX_PLATAFORMA
 
 -----------------------------CARGA PARA A TB_AUX_PRODUTO----------------------------------------------------
 
@@ -88,6 +98,10 @@ BEGIN
 	INSERT INTO TB_AUX_PRODUTO
 	SELECT @data, ID_PRODUTO, NOME_PRODUTO,VALOR_PRODUTO FROM TB_PRODUTO
 END
+
+EXEC SP_OLTP_PRODUTO '20190101'
+SELECT * FROM TB_PRODUTO
+SELECT * FROM TB_AUX_PRODUTO
 
 -----------------------------CARGA PARA A TB_AUX_PAGAMENTO----------------------------------------------------
 
@@ -103,16 +117,19 @@ BEGIN
 	FETCH C_PAGAMENTO INTO @codigo, @tipo, @valor
 
 	WHILE(@@FETCH_STATUS = 0)
-	BEGIN
-		INSERT INTO TB_AUX_PAGAMENTO 
-		VALUES(@data, @codigo,@tipo, @valor)
+		BEGIN
+			INSERT INTO TB_AUX_PAGAMENTO 
+			VALUES(@data, @codigo,@tipo, @valor)
 
-		FETCH C_PAGAMENTO INTO @codigo, @tipo, @valor
-	END
+			FETCH C_PAGAMENTO INTO @codigo, @tipo, @valor
+		END
 	CLOSE C_PAGAMENTO
 	DEALLOCATE C_PAGAMENTO
 END
 
+EXEC SP_OLTP_PAGAMENTO '20190101'
+SELECT * FROM TB_COMPRA
+SELECT * FROM TB_AUX_PAGAMENTO
 
 -----------------------------CARGA PARA A TB_AUX_CINEMA-----------------------------------------------
 
@@ -124,7 +141,9 @@ BEGIN
 	SELECT @data, ID_CINEMA, NOME, DESCRICAO FROM TB_UNIDADE_CINEMA
 END
 
-
+EXEC SP_OLTP_CINEMA '20190101'
+SELECT * FROM TB_UNIDADE_CINEMA
+SELECT * FROM TB_AUX_CINEMA
 -----------------------------CARGA PARA A TB_AUX_TURNO-------------------------------------------
 
 CREATE PROCEDURE SP_OLTP_TURNO(@data DATETIME)
@@ -135,3 +154,6 @@ BEGIN
 	SELECT @data, ID_TURNO, TIPO FROM TB_TURNO
 END
 
+EXEC SP_OLTP_TURNO '20190101'
+SELECT * FROM TB_TURNO
+SELECT * FROM TB_AUX_TURNO
