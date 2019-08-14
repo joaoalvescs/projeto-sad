@@ -1,6 +1,6 @@
 -----------------------------CARGA PARA A TB_AUX VENDA_PRODUTO-------------------------------------------
 
-ALTER PROCEDURE SP_OLTP_FATO_VENDA_PRODUTO(@data DATETIME)
+CREATE PROCEDURE SP_OLTP_FATO_VENDA_PRODUTO(@data DATETIME)
 AS
 BEGIN
 	DECLARE @cod_compra INT, @dt_venda DATE, @hora_venda TIME, @id_endereco INT, @id_produto INT, @tipo_pag VARCHAR(25),
