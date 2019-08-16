@@ -7,8 +7,8 @@ BEGIN
 			@cod_cliente INT, @cod_cinema INT, @cod_plataforma INT, @valor_pago numeric(10,2), @quantidade INT
 	DECLARE @id_endereco INT, @id_tempo INT, @id_produto INT , @id_pagamento INT, @id_cliente INT, @id_cinema INT, @id_plataforma INT, @turno VARCHAR(20), @id_turno INT
 
-	DECLARE C_FATO_PRODUTO CURSOR FOR SELECT COD_COMPRA, DT_VENDA, HORA_VENDA, ID_ENDERECO, ID_PRODUTO, TIPO_PAGAMENTO,
-											 ID_CLIENTE, ID_CINEMA, ID_PLATAFORMA, VALOR_PAGO, QUANTIDADE FROM TB_AUX_FATO_VENDA_PRODUTO
+	DECLARE C_FATO_PRODUTO CURSOR FOR SELECT COD_COMPRA, DT_VENDA, HORA_VENDA, TIPO_PAGAMENTO,
+											 VALOR_PAGO, QUANTIDADE FROM TB_AUX_FATO_VENDA_PRODUTO
 
 	FETCH C_FATO_PRODUTO INTO @cod_compra, @dt_venda, @hora_venda, @cod_endereco, @cod_produto, @tipo_pagamento,
 							  @cod_cliente, @cod_cinema, @cod_plataforma, @valor_pago, @quantidade
