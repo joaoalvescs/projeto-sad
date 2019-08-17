@@ -19,7 +19,7 @@ CREATE TABLE DIM_TEMPO(
 	PRIMARY KEY (ID_TEMPO)
 )
 
-CREATE PROCEDURE SP_Dim_Tempo (@dt_inicial datetime, @dt_final datetime)
+CREATE PROCEDURE SP_Dim_Tempo (@dt_inicial DATETIME, @dt_final DATETIME)
 AS 
 DECLARE @dia smallint, @mes smallint, @ano smallint, @nm_dia varchar(25), @nm_mes varchar(25), @dia_util char(3),
 		@fim_semna char(3), @nm_semestre varchar(20), @semestre smallint, @nm_trimestre varchar(20), @fim_mes char(3),

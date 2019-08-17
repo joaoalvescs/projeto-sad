@@ -9,22 +9,22 @@ BEGIN
 	DELETE FROM TB_AUX_FATO_VENDA_PRODUTO WHERE DATA_CARGA = @data
 	
 	DECLARE C_FATO_VENDA CURSOR FOR SELECT COM.CODIGO_COMPRA, COM.DATA_COMPRA, COM.HORA_COMPRA, COM.VALOR_COMPRA,COM.ID_CINEMA,C.ID_CLIENTE,
-										   COM.TIPO_PAGAMENTO, COM.ID_PLATAFORMA,E.ID_ENDERECO, P.ID_PRODUTO FROM TB_COMPRA AS COM
+										   COM.ID_PLATAFORMA,E.ID_ENDERECO, P.ID_PRODUTO FROM TB_COMPRA AS COM
 										   INNER JOIN TB_CLIENTE AS C ON(COM.ID_CLIENTE = C.ID_CLIENTE) 
 										   INNER JOIN TB_ENDERECO AS E ON(C.ID_ENDERECO = E.ID_ENDERECO)
 										   INNER JOIN TB_COMPRA_PRODUTO AS P ON(P.ID_COMPRA = COM.ID_COMPRA)	
 	OPEN C_FATO_VENDA
 
-	FETCH C_FATO_VENDA INTO @cod_compra, @dt_venda, @hora_venda, @valor_compra,@id_cinema, @id_cliente, @tipo_pag, @id_plataforma,
+	FETCH C_FATO_VENDA INTO @cod_compra, @dt_venda, @hora_venda, @valor_compra,@id_cinema, @id_cliente, @id_plataforma,
 							@id_endereco, @id_produto
 
 	WHILE(@@FETCH_STATUS = 0)
 	BEGIN 
 		INSERT INTO TB_AUX_FATO_VENDA_PRODUTO
-		VALUES(@data, @cod_compra, @dt_venda, @hora_venda, @id_endereco, @id_produto, @tipo_pag, @id_cliente, @id_cinema, @id_plataforma,
+		VALUES(@data, @cod_compra, @dt_venda, @hora_venda, @id_endereco, @id_produto, @cod_compra, @id_cliente, @id_cinema, @id_plataforma,
 			   @valor_compra, 1)
 
-		FETCH C_FATO_VENDA INTO @cod_compra, @dt_venda, @hora_venda, @valor_compra,@id_cinema, @id_cliente, @tipo_pag, @id_plataforma,
+		FETCH C_FATO_VENDA INTO @cod_compra, @dt_venda, @hora_venda, @valor_compra,@id_cinema, @id_cliente, @id_plataforma,
 							@id_endereco, @id_produto
 	END
 	CLOSE C_FATO_VENDA
@@ -34,9 +34,10 @@ END
 EXEC SP_OLTP_FATO_VENDA_PRODUTO '20190101'
 SELECT * FROM TB_AUX_FATO_VENDA_PRODUTO
 SELECT * FROM TB_COMPRA_PRODUTO
+select * from TB_AUX_PAGAMENTO
 -----------------------------CARGA PARA A TB_AUX_CLIENTE-------------------------------------------
 
-CREATE PROCEDURE SP_OLTP_CLIENTE(@data DATETIME)
+ALTER PROCEDURE SP_OLTP_CLIENTE(@data DATETIME)
 AS
 BEGIN
 	DECLARE @id INT,@cpf VARCHAR(15),@sexo varchar(1), @nome VARCHAR(45),@sobrenome VARCHAR(45),@dt_nascimento DATE
@@ -105,14 +106,14 @@ SELECT * FROM TB_AUX_PRODUTO
 
 -----------------------------CARGA PARA A TB_AUX_PAGAMENTO----------------------------------------------------
 
-CREATE PROCEDURE SP_OLTP_PAGAMENTO(@data DATETIME)
+ALTER PROCEDURE SP_OLTP_PAGAMENTO(@data DATETIME)
 AS
 BEGIN
 	DECLARE @codigo INT, @tipo VARCHAR(25), @valor NUMERIC(10,2)
 
 	DELETE FROM TB_AUX_PAGAMENTO WHERE DATA_CARGA = @data
 
-	DECLARE C_PAGAMENTO CURSOR FOR SELECT ID_COMPRA,TIPO_PAGAMENTO,VALOR_COMPRA FROM TB_COMPRA
+	DECLARE C_PAGAMENTO CURSOR FOR SELECT CODIGO_COMPRA,TIPO_PAGAMENTO,VALOR_COMPRA FROM TB_COMPRA
 	OPEN C_PAGAMENTO
 	FETCH C_PAGAMENTO INTO @codigo, @tipo, @valor
 
@@ -128,7 +129,6 @@ BEGIN
 END
 
 EXEC SP_OLTP_PAGAMENTO '20190101'
-SELECT * FROM TB_COMPRA
 SELECT * FROM TB_AUX_PAGAMENTO
 
 -----------------------------CARGA PARA A TB_AUX_CINEMA-----------------------------------------------
