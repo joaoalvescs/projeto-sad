@@ -1,3 +1,5 @@
+/* Igor e João */
+
 select * from fato_venda_produto
 select * from dim_tempo
 select * from dim_cliente

@@ -1,3 +1,5 @@
+/* Igor e João */
+
 /* 1.Quantidade de ingressos vendidos por gênero de filme? */
 
 select sum(GR_FILME) AS TOTAL, GENERO_FILME.gr_filme  as GENERO_FILME from DIM_FILME d
