@@ -18,7 +18,9 @@ FROM   cinema.pessoa AS pe
 NATURAL JOIN   cinema.cliente AS c  
 WHERE  pe.sexo='F'
 
+
 -- Select 3 --
+--select * from 
 -- Retornar os clientes que realizaram compra e as suas respectivas compras
 SELECT     pe.cpf, 
            pe.primeiro_nome, 
