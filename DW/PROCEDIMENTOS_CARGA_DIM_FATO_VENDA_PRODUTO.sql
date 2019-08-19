@@ -1,6 +1,6 @@
 -----------------------------CARGA PARA A DIM_FATO_VENDA_PRODUTO-------------------------------------------
 
-ALTER PROCEDURE SP_FATO_VENDA_PRODUTO(@data_carga DATETIME)
+CREATE PROCEDURE SP_FATO_VENDA_PRODUTO(@data_carga DATETIME)
 AS
 BEGIN
 	DECLARE @cod_compra INT, @dt_venda DATE, @hora_venda TIME, @cod_endereco INT, @cod_produto INT, @cod_pagamento INT,
