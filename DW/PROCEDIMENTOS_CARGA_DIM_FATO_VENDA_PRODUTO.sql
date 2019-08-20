@@ -49,6 +49,7 @@ BEGIN
 								ID_PLATAFORMA,ID_TURNO, QUANTIDADE, VALOR_PAGO)
 					VALUES(@cod_compra,@id_endereco,@id_tempo,@id_produto, @id_pagamento,@id_cliente, @id_cinema, @id_plataforma,
 						   @id_turno,@quantidade, @valor_pago)
+
 				END
 
 			FETCH C_FATO_PRODUTO INTO @cod_compra, @dt_venda, @hora_venda, @cod_endereco, @cod_produto, @cod_pagamento,
