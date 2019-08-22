@@ -6,6 +6,9 @@ Banco Cinema: Script de povoamento
 -- Unidade-Cinema --
 -- nome, descrição---
 
+USE CINEMA 
+GO
+
 INSERT INTO TB_UNIDADE_CINEMA VALUES( 'Cinema Itabaiana','O único cinema em Itabaiana')
 INSERT INTO TB_UNIDADE_CINEMA VALUES( 'Cinema Jardins','O único cinema fora do shopping no bairro Jardins em Aracaju')
 INSERT INTO TB_UNIDADE_CINEMA VALUES( 'Cinema Centro','Um dos poucos cinemas no Centro de Aracaju')

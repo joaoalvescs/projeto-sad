@@ -1,10 +1,8 @@
 USE CINEMA
-
 GO
-
 -----------------------------CARGA PARA A TB_AUX VENDA_INGRESSO-------------------------------------------
 
-CREATE PROCEDURE SP_OLTP_FATO_VENDA_INGRESSO(@data DATETIME)
+CREATE PROCEDURE SP_OLTPTB_AUX_FATO_VENDA_INGRESSO(@data DATETIME)
 AS
 BEGIN
 	DECLARE @cod_compra INT, @id_ingresso INT, @id_endereco INT, @dt_venda DATE, @hora_venda TIME, @tipo_pag VARCHAR(25),
@@ -36,8 +34,8 @@ BEGIN
 	DEALLOCATE C_FATO_VENDA
 END
 
-
 -----------------------------CARGA PARA A TB_AUX_FILME-------------------------------------------
+GO
 
 CREATE PROCEDURE SP_OLTP_TB_AUX_FILME (@data DATETIME)
 AS
@@ -49,6 +47,7 @@ END
 
 
 -----------------------------CARGA PARA A TB_AUX_SESSAO-------------------------------------------
+GO
 
 CREATE PROCEDURE SP_OLTP_TB_AUX_SESSAO (@data DATETIME)
 AS 
@@ -59,6 +58,8 @@ BEGIN
 END
 
 -----------------------------CARGA PARA A TB_AUX_PLANO_USADO-------------------------------------------
+GO
+
 CREATE PROCEDURE SP_OLTP_TB_AUX_PLANO (@data DATETIME)
 AS
 BEGIN
@@ -69,6 +70,7 @@ END
 
 
 -----------------------------CARGA PARA TB_AUX_INGRESSO-----------------------------------------------
+GO
 
 CREATE PROCEDURE SP_OLTP_TB_AUX_INGRESSO (@data DATETIME)
 AS
@@ -90,4 +92,3 @@ BEGIN
 	CLOSE C_INGRESSO
 	DEALLOCATE C_INGRESSO
 END
-
