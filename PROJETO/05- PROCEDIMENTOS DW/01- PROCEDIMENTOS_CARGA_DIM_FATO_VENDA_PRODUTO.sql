@@ -73,6 +73,7 @@ BEGIN
 END
 
 -----------------------------CARGA PARA A DIM_TEMPO------------------------------------------------------
+GO 
 
 CREATE PROCEDURE SP_DIM_TEMPO (@dt_inicial DATETIME, @dt_final DATETIME)
 AS 
@@ -176,9 +177,8 @@ WHILE(@dt_inicial <= @dt_final)
 		SET @dt_inicial = DATEADD(dd,1,@dt_inicial)	
 END
 
-EXEC SP_Dim_Tempo '20000101', '20190101'
-
 -----------------------------CARGA PARA A DIM_CLIENTE------------------------------------------------------
+ GO
 
 CREATE PROCEDURE SP_DIM_CLIENTE(@data_carga DATETIME)
 AS
@@ -217,12 +217,10 @@ BEGIN
 	DEALLOCATE C_CLIENTE
 END
 
-EXEC SP_DIM_CLIENTE'20180101'
-SELECT * FROM DIM_CLIENTE
-
 -----------------------------CARGA PARA A DIM_ENDERECO_CLIENTE---------------------------------------------
+GO
 
-ALTER PROCEDURE SP_DIM_ENDERECO_CLIENTE (@data_carga DATETIME)
+CREATE PROCEDURE SP_DIM_ENDERECO_CLIENTE (@data_carga DATETIME)
 AS
 BEGIN
 	DECLARE @cod_endereco INT, @rua VARCHAR(45),@numero VARCHAR(45), @cidade VARCHAR(45), @bairro VARCHAR(45), 
@@ -260,9 +258,6 @@ BEGIN
 	CLOSE C_ENDERECO_CLIENTE
 	DEALLOCATE C_ENDERECO_CLIENTE
 END
-
-EXEC SP_DIM_ENDERECO_CLIENTE '20180101'
-SELECT * FROM DIM_ENDERECO_CLIENTE
 
 -----------------------------CARGA PARA A DIM_PLATAFORMA---------------------------------------------------
 GO
@@ -351,8 +346,9 @@ BEGIN
 END
 
 -----------------------------CARGA PARA A DIM_PAGAMENTO-----------------------------------------------------
+GO
 
-ALTER PROCEDURE SP_DIM_PAGAMENTO (@data_carga DATETIME)
+CREATE PROCEDURE SP_DIM_PAGAMENTO (@data_carga DATETIME)
 AS
 BEGIN
 	DECLARE @cod_pagamento INT, @tipo_pagamento VARCHAR(45), @valor_pagamento numeric(10,2)
@@ -390,6 +386,8 @@ BEGIN
 END
 
 -----------------------------CARGA PARA A DIM_CINEMA------------------------------------------------------
+GO
+
 
 CREATE PROCEDURE SP_DIM_CINEMA (@data_carga DATETIME)
 AS
