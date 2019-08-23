@@ -298,8 +298,6 @@ BEGIN
 	DEALLOCATE C_PLATAFORMA
 END
 
-EXEC SP_DIM_PLATAFORMA '20180101'
-SELECT * FROM DIM_PLATAFORMA
 
 -----------------------------CARGA PARA A DIM_PRODUTO------------------------------------------------------
 GO
