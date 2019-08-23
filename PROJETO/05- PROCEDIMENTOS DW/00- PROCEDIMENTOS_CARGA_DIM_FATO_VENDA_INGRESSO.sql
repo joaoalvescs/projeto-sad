@@ -199,3 +199,43 @@ BEGIN
 	CLOSE C_PLANO
 	DEALLOCATE C_PLANO
 END
+
+--------------------------------------------- CARGA DIMENSÃO INGRESSO ----------------------------------------------------------
+GO
+
+CREATE PROCEDURE SP_DIM_INGRESSO(@data_carga DATETIME)
+AS
+BEGIN
+	DECLARE @cod_ingresso INT, @disponibilidade VARCHAR(45), @valor_pago NUMERIC(10,2);
+	DECLARE C_INGRESSO CURSOR FOR SELECT COD_INGRESSO, DISPONIBILIDADE, VALOR_INGRESSO FROM TB_AUX_INGRESSO
+
+	OPEN C_INGRESSO 
+	
+	FETCH C_INGRESSO INTO @cod_ingresso, @disponibilidade, @valor_pago
+	WHILE(@@FETCH_STATUS = 0)
+		BEGIN
+			IF(@cod_ingresso IS NULL OR @disponibilidade IS NULL OR @valor_pago IS NULL)
+				BEGIN
+					INSERT INTO TB_VIOLACAO_INGRESSO(DATA_CARGA, COD_INGRESSO, DISPONIBILIDADE, VALOR_INGRESSO, DATA_VIOLACAO, VIOLACAO)
+					VALUES(@data_carga, @cod_ingresso, @disponibilidade, @valor_pago, GETDATE(), 'LINHA POSSUI ALGUM ATRIBUTO NULL')
+				END
+			ELSE
+				BEGIN
+					IF(EXISTS(SELECT 1 FROM DIM_INGRESSO WHERE COD_INGRESSO = @cod_ingresso))
+						BEGIN
+							UPDATE DIM_INGRESSO SET DISPONIBILIDADE = @disponibilidade, VALOR_INGRESSO = @valor_pago
+							 WHERE COD_INGRESSO = @cod_ingresso
+						END
+					ELSE
+						BEGIN
+							INSERT INTO DIM_INGRESSO(COD_INGRESSO, DISPONIBILIDADE, VALOR_INGRESSO)
+							VALUES(@cod_ingresso, @disponibilidade, @valor_pago)
+						END
+				END
+
+			FETCH C_INGRESSO INTO @cod_ingresso, @disponibilidade, @valor_pago
+		END
+END
+
+EXEC SP_DIM_INGRESSO '20180101'
+
