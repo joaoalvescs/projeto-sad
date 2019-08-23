@@ -1,11 +1,3 @@
-/* BANCO DE DADOS 
-Banco Cinema: Script de povoamento
- Igor Terriaga Santos
-*/
-
--- Unidade-Cinema --
--- nome, descrição---
-
 USE CINEMA 
 GO
 
